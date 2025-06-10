@@ -51,8 +51,105 @@ function navigateToProduct(url) {
     window.location.href = targetUrl;
 }
 
-// 전역으로 함수 노출
+// 장바구니 담기 기능
+function addToCart(productId, productName, price) {
+    // 현재 장바구니에 상품이 있는지 확인
+    let cart = JSON.parse(localStorage.getItem('cart')) || {};
+    
+    // 상품 정보 저장
+    cart[productId] = {
+        name: productName,
+        price: price,
+        quantity: (cart[productId]?.quantity || 0) + 1
+    };
+    
+    // 장바구니 업데이트
+    localStorage.setItem('cart', JSON.stringify(cart));
+    
+    // GA4 이벤트 추적
+    gtag('event', 'add_to_cart', {
+        currency: 'KRW',
+        value: price,
+        items: [{
+            item_id: productId,
+            item_name: productName,
+            price: price,
+            currency: 'KRW'
+        }]
+    });
+    
+    // 장바구니 아이콘에 뱃지 표시
+    const cartIcon = document.querySelector('.cart-icon');
+    if (cartIcon) {
+        const cartCount = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+        cartIcon.innerHTML = `🛒 (${cartCount})`;
+    }
+    
+    // 알림 표시
+    alert(`${productName}이(가) 장바구니에 추가되었습니다.`);
+}
+
+// 바로 구매하기 기능
+function buyNow(productId, productName, price) {
+    // 현재 버전 확인
+    const currentVersion = sessionStorage.getItem('currentVersion');
+    
+    // 장바구니에 상품 추가
+    addToCart(productId, productName, price);
+    
+    // 결제 페이지로 이동
+    if (currentVersion === 'a') {
+        window.location.href = 'cart.html';
+    } else {
+        window.location.href = 'cart2.html';
+    }
+}
+
+// 버튼 이벤트 핸들러 등록
+function setupEventHandlers() {
+    // 장바구니 담기 버튼
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productId = e.currentTarget.dataset.productId;
+            const productName = e.currentTarget.dataset.productName;
+            const price = parseFloat(e.currentTarget.dataset.price);
+            addToCart(productId, productName, price);
+        });
+    });
+    
+    // 바로 구매하기 버튼
+    document.querySelectorAll('.buy-now').forEach(button => {
+        button.addEventListener('click', (e) => {
+            const productId = e.currentTarget.dataset.productId;
+            const productName = e.currentTarget.dataset.productName;
+            const price = parseFloat(e.currentTarget.dataset.price);
+            buyNow(productId, productName, price);
+        });
+    });
+}
+
+// 초기화 함수
+function initialize() {
+    // 버튼 이벤트 핸들러 등록
+    setupEventHandlers();
+    
+    // 장바구니 아이콘 뱃지 업데이트
+    const cartIcon = document.querySelector('.cart-icon');
+    if (cartIcon) {
+        const cart = JSON.parse(localStorage.getItem('cart')) || {};
+        const cartCount = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+        cartIcon.innerHTML = `🛒 (${cartCount})`;
+    }
+}
+
+// 모든 함수를 전역으로 노출
 window.navigateToProduct = navigateToProduct;
+window.addToCart = addToCart;
+window.buyNow = buyNow;
+window.initialize = initialize;
+
+// 페이지 로드 시 초기화
+window.addEventListener('load', initialize);
 
 // 버전에 따라 컨텐츠 표시
 function showVersionContent() {

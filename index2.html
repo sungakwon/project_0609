@@ -20,6 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="/src/index2.css">
+    <script src="/src/product.js"></script>
     <script src="/src/index2.js"></script>
     <script>
         // 페이지 로드 시 버전 설정
@@ -136,8 +137,16 @@
                                 <span class="sale-price">17,900원</span>
                                 <span class="discount-rate">36%</span>
                             </p>
+                            <div class="product-buttons">
+                                <button class="add-to-cart" data-product-id="AC-CREAM-001" data-product-name="AC 딥 장벽 진정 크림 60ml" data-price="17900">장바구니 담기</button>
+                                <button class="buy-now" data-product-id="AC-CREAM-001" data-product-name="AC 딥 장벽 진정 크림 60ml" data-price="17900">바로 구매하기</button>
+                            </div>
                         </div>
-                        <div class="product-card" onclick="goToProductDetail('ac-mask-detail.html', '2'); trackGA4Event('product_click', {product_id: 'AC-MASK-001', product_name: 'AC 딥 훼이셜 진정 마스크', price: 14900});">
+                        <div class="product-card" data-product-id="AC-MASK-001" data-price="14900" onclick="goToProductDetail('ac-mask-detail.html', 'b'); trackGA4Event('product_click', {product_id: 'AC-MASK-001', product_name: 'AC 딥 훼이셜 진정 마스크', price: 14900});">
+                            <div class="product-buttons">
+                                <button class="add-to-cart" data-product-id="AC-MASK-001" data-product-name="AC 딥 훼이셜 진정 마스크 10매" data-price="14900">장바구니 담기</button>
+                                <button class="buy-now" data-product-id="AC-MASK-001" data-product-name="AC 딥 훼이셜 진정 마스크 10매" data-price="14900">바로 구매하기</button>
+                            </div>
                             <img src="/images/ac-mask-pack.jpg" alt="AC 딥 훼이셜 진정 마스크">
                             <h3>AC 딥 훼이셜 진정 마스크 10매</h3>
                             <p class="price">
