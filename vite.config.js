@@ -18,8 +18,17 @@ export default defineConfig({
         product: fileURLToPath(new URL('./product.html', import.meta.url)),
         product2: fileURLToPath(new URL('./product2.html', import.meta.url)),
         order: fileURLToPath(new URL('./order.html', import.meta.url)),
-        // 다른 HTML 파일들도 추가할 수 있습니다
+        ac_product: './ac-product.html',
+        ac_ampoule: './ac-ampoule-detail.html',
+        ac_cream: './ac-cream-detail.html',
+        ac_mask: './ac-mask-detail.html',
+        amino_product: './amino-product.html',
+        amino_powder: './amino-powder-detail.html',
+        cleansing_balm: './cleansing-balm-detail.html',
+        cleansing_milk: './cleansing-milk-detail.html'
       }
-    }
+    },
+    outDir: 'dist',
+    emptyOutDir: true
   }
 });
