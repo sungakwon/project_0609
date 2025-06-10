@@ -1,7 +1,13 @@
 import { defineConfig } from 'vite';
 import { fileURLToPath, URL } from 'url';
+import path from 'path';
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      '/src': path.resolve(__dirname, 'src')
+    }
+  },
   root: '.',
   build: {
     outDir: 'dist',
@@ -32,6 +38,9 @@ export default defineConfig({
       output: {
         assetFileNames: 'assets/[name][extname]'
       }
+    },
+    assets: {
+      include: ['src/product.js']
     }
   }
 });

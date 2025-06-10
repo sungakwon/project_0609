@@ -27,25 +27,32 @@ function goToMainPage() {
 window.goToMainPage = goToMainPage;
 
 // 제품 상세 페이지로 이동하는 함수
-window.navigateToProduct = function(url) {
-    const currentVersion = sessionStorage.getItem('currentVersion');
-    let targetUrl = url;
+function navigateToProduct(url) {
+    // 현재 URL에서 제품 이름을 추출
+    const currentUrl = window.location.pathname;
+    const productName = url.split('-')[1];
     
-    // 현재 버전에 따라 URL을 설정
-    if (currentVersion === 'a') {
-        targetUrl = 'ac-' + url.split('-')[1] + '-detail.html';
-    } else if (currentVersion === 'b') {
-        targetUrl = 'amino-' + url.split('-')[1] + '-detail.html';
-    }
-    
-    // URL이 이미 detail.html로 끝나는 경우 그대로 사용
-    if (url.includes('detail.html')) {
-        targetUrl = url;
+    // 현재 URL에 따라 적절한 상세페이지 URL 생성
+    if (currentUrl.includes('ac-product.html')) {
+        // AC 라인 상품
+        targetUrl = `ac-${productName}-detail.html`;
+    } else if (currentUrl.includes('amino-product.html')) {
+        // AMINO 라인 상품
+        targetUrl = `amino-${productName}-detail.html`;
+    } else {
+        // 기본 로직: 현재 버전에 따라 URL 결정
+        const currentVersion = sessionStorage.getItem('currentVersion');
+        targetUrl = currentVersion === 'a' 
+            ? `ac-${productName}-detail.html`
+            : `amino-${productName}-detail.html`;
     }
     
     console.log('Navigating to:', targetUrl);
     window.location.href = targetUrl;
-};
+}
+
+// 전역으로 함수 노출
+window.navigateToProduct = navigateToProduct;
 
 // 버전에 따라 컨텐츠 표시
 function showVersionContent() {
