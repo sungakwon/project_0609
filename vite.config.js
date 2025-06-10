@@ -4,6 +4,9 @@ import { fileURLToPath, URL } from 'url';
 export default defineConfig({
   root: '.',
   build: {
+    outDir: 'dist',
+    emptyOutDir: true,
+    assetsDir: 'assets',
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
@@ -26,9 +29,11 @@ export default defineConfig({
         amino_powder: './amino-powder-detail.html',
         cleansing_balm: './cleansing-balm-detail.html',
         cleansing_milk: './cleansing-milk-detail.html'
-      }
-    },
-    outDir: 'dist',
-    emptyOutDir: true
+      },
+      output: {
+        assetFileNames: 'assets/[name][extname]'
+      },
+      external: ['product.js']
+    }
   }
 });
