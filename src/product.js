@@ -146,6 +146,31 @@ function initialize() {
 window.navigateToProduct = navigateToProduct;
 window.addToCart = addToCart;
 window.buyNow = buyNow;
+
+// DOMContentLoaded 이벤트 리스너 등록
+document.addEventListener('DOMContentLoaded', function() {
+    // 장바구니 담기 버튼 이벤트 리스너
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product-id');
+            const productName = this.getAttribute('data-product-name');
+            const price = parseInt(this.getAttribute('data-price'));
+            addToCart(productId, productName, price);
+        });
+    });
+
+    // 바로 구매하기 버튼 이벤트 리스너
+    const buyNowButtons = document.querySelectorAll('.buy-now-btn');
+    buyNowButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const productId = this.getAttribute('data-product-id');
+            const productName = this.getAttribute('data-product-name');
+            const price = parseInt(this.getAttribute('data-product-price'));
+            buyNow(productId, productName, price);
+        });
+    });
+});
 window.initialize = initialize;
 
 // 페이지 로드 시 초기화

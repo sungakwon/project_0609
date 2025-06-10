@@ -97,6 +97,23 @@
                 </div>
             </div>
 
+            <div class="purchase-buttons">
+                <button class="add-to-cart-btn" 
+                        data-product-id="AC-AMPOULE-001"
+                        data-product-name="AC 딥 장벽 진정 앰플"
+                        data-price="17900"
+                        onclick="trackGA4Event('add_to_cart', {product_id: window.productDetail.id, product_name: window.productDetail.name, price: window.productDetail.price, quantity: parseInt(document.getElementById('quantity').value)})">
+                    장바구니 담기
+                </button>
+                <button class="buy-now-btn" 
+                        data-product-id="AC-AMPOULE-001"
+                        data-product-name="AC 딥 장벽 진정 앰플"
+                        data-product-price="17900"
+                        onclick="trackGA4Event('buy_now', {product_id: window.productDetail.id, product_name: window.productDetail.name, price: window.productDetail.price, quantity: parseInt(document.getElementById('quantity').value)})">
+                    바로 구매하기
+                </button>
+            </div>
+
             <div class="total-price">
                 <div class="total-price-label">총 상품 금액</div>
                 <div class="total-price-amount">17,900원</div>
