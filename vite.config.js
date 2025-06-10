@@ -6,7 +6,6 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
-    assetsDir: 'assets',
     rollupOptions: {
       input: {
         main: fileURLToPath(new URL('./index.html', import.meta.url)),
@@ -32,8 +31,7 @@ export default defineConfig({
       },
       output: {
         assetFileNames: 'assets/[name][extname]'
-      },
-      external: ['product.js']
+      }
     }
   }
 });

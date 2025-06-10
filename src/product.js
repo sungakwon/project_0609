@@ -28,20 +28,22 @@ window.goToMainPage = goToMainPage;
 
 // 제품 상세 페이지로 이동하는 함수
 window.navigateToProduct = function(url) {
+    const currentVersion = sessionStorage.getItem('currentVersion');
     let targetUrl = url;
-    const mainVersion = sessionStorage.getItem('mainVersion');
-    if (mainVersion === '1') {
-        targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'v=1';
-        sessionStorage.setItem('currentVersion', 'a');
-    } else if (mainVersion === '2') {
-        targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'v=2';
-        sessionStorage.setItem('currentVersion', 'b');
-    } else {
-        // fallback: 기존 로직
-        const currentVersion = sessionStorage.getItem('currentVersion');
-        targetUrl += (targetUrl.includes('?') ? '&' : '?') + 'v=' + (currentVersion === 'a' ? '1' : '2');
+    
+    // 현재 버전에 따라 URL을 설정
+    if (currentVersion === 'a') {
+        targetUrl = 'ac-' + url.split('-')[1] + '-detail.html';
+    } else if (currentVersion === 'b') {
+        targetUrl = 'amino-' + url.split('-')[1] + '-detail.html';
     }
-    console.log('Debug (product.js): Navigating to:', targetUrl, 'with currentVersion:', sessionStorage.getItem('currentVersion'));
+    
+    // URL이 이미 detail.html로 끝나는 경우 그대로 사용
+    if (url.includes('detail.html')) {
+        targetUrl = url;
+    }
+    
+    console.log('Navigating to:', targetUrl);
     window.location.href = targetUrl;
 };
 
