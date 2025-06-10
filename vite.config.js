@@ -1,46 +1,32 @@
+
 import { defineConfig } from 'vite';
-import { fileURLToPath, URL } from 'url';
-import path from 'path';
+import { resolve } from 'path';
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      '/src': path.resolve(__dirname, 'src')
-    }
-  },
-  root: '.',
   build: {
-    outDir: 'dist',
-    emptyOutDir: true,
     rollupOptions: {
       input: {
-        main: fileURLToPath(new URL('./index.html', import.meta.url)),
-        index1: fileURLToPath(new URL('./index1.html', import.meta.url)),
-        index2: fileURLToPath(new URL('./index2.html', import.meta.url)),
-        best: fileURLToPath(new URL('./best.html', import.meta.url)),
-        best2: fileURLToPath(new URL('./best2.html', import.meta.url)),
-        brand: fileURLToPath(new URL('./brand.html', import.meta.url)),
-        brand2: fileURLToPath(new URL('./brand2.html', import.meta.url)),
-        cart: fileURLToPath(new URL('./cart.html', import.meta.url)),
-        cart2: fileURLToPath(new URL('./cart2.html', import.meta.url)),
-        product: fileURLToPath(new URL('./product.html', import.meta.url)),
-        product2: fileURLToPath(new URL('./product2.html', import.meta.url)),
-        order: fileURLToPath(new URL('./order.html', import.meta.url)),
-        ac_product: './ac-product.html',
-        ac_ampoule: './ac-ampoule-detail.html',
-        ac_cream: './ac-cream-detail.html',
-        ac_mask: './ac-mask-detail.html',
-        amino_product: './amino-product.html',
-        amino_powder: './amino-powder-detail.html',
-        cleansing_balm: './cleansing-balm-detail.html',
-        cleansing_milk: './cleansing-milk-detail.html'
-      },
-      output: {
-        assetFileNames: 'assets/[name][extname]'
+        ac-ampoule-detail: resolve(__dirname, "src/ac-ampoule-detail.html")
+    ac-cream-detail: resolve(__dirname, "src/ac-cream-detail.html")
+    ac-mask-detail: resolve(__dirname, "src/ac-mask-detail.html")
+    ac-product: resolve(__dirname, "src/ac-product.html")
+    amino-powder-detail: resolve(__dirname, "src/amino-powder-detail.html")
+    amino-product: resolve(__dirname, "src/amino-product.html")
+    best: resolve(__dirname, "src/best.html")
+    best2: resolve(__dirname, "src/best2.html")
+    brand: resolve(__dirname, "src/brand.html")
+    brand2: resolve(__dirname, "src/brand2.html")
+    cart: resolve(__dirname, "src/cart.html")
+    cart2: resolve(__dirname, "src/cart2.html")
+    cleansing-balm-detail: resolve(__dirname, "src/cleansing-balm-detail.html")
+    cleansing-milk-detail: resolve(__dirname, "src/cleansing-milk-detail.html")
+    index: resolve(__dirname, "src/index.html")
+    index1: resolve(__dirname, "src/index1.html")
+    index2: resolve(__dirname, "src/index2.html")
+    order: resolve(__dirname, "src/order.html")
+    product: resolve(__dirname, "src/product.html")
+    product2: resolve(__dirname, "src/product2.html")
       }
-    },
-    assets: {
-      include: ['src/product.js']
     }
   }
 });
